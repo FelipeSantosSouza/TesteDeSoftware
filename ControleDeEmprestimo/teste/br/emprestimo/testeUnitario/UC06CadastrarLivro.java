@@ -27,16 +27,37 @@ public class UC06CadastrarLivro {
 	public void CT01UC06CadastrarLivro_com_isbn_invalido_branco() {
 		livro.setIsbn("");
 	}
+	
+	@Test(expected = RuntimeException.class)
+	public void CT01UC06CadastrarLivro_com_titulo_invalido_branco() {
+		livro.setTitulo("");
+	}
 
+	@Test(expected = RuntimeException.class)
+	public void CT01UC06CadastrarLivro_com_titulo_nulo_branco() {
+		livro.setTitulo(null);
+	}
 	@Test(expected = RuntimeException.class)
 	public void CT02UC06CadastrarLivro_com_isbn_invalido_nulo() {
 		livro.setIsbn(null);
 	}
 	
-
+	
 	@Test
 	public void CT03UC06CadastrarLivro_com_isbn_valido() {
 		assertEquals("121212", livro.getIsbn());
+	}
+	
+	
+	
+	@Test
+	public void CT03UC06CadastrarLivro_get_titulo() {
+		assertEquals("Engenharia de Software", livro.getTitulo());
+	}
+	
+	@Test
+	public void CT03UC06CadastrarLivro_get_autor() {
+		assertEquals("Pressman", livro.getAutor());
 	}
 	@Test
 	public void CT04UC01CadastrarLivro_com_isbn_invalido(){

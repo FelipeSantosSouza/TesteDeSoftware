@@ -44,6 +44,16 @@ public class UC01RegistraEmprestimoDeLivro {
 	public void CT02UC01FB_registrar_emprestimo_com_dados_invalidos() {
 		servico.empresta(null, usuario);
 	}
+	
+	@Test
+	public void CT03UC01FB_registrar_emprestimo_get_livro() {
+		assertEquals(livro, emprestimo.getLivro());
+	}
+	
+	@Test
+	public void CT03UC01FB_registrar_emprestimo_get_usuario() {
+		assertEquals(usuario, emprestimo.getUsuario());
+	}
 	@Test
 	public void CT03UC01FB_registrar_emprestimo_com_dados_invalidos(){
 		try{
@@ -63,8 +73,57 @@ public class UC01RegistraEmprestimoDeLivro {
 		//verificacao
 	    assertTrue(dataEsperada.equals(dataObtida));
 	}
+	
+	@Test
+	public void CT04UC01FB_registrar_emprestimo_com_sucesso_validacao_da_data_invalidia() {		//acao
+		assertTrue(emprestimo.validaData("09/10/2000"));
+	}
 	@Test
 	public void CT05UC01FB_registrar_emprestimo_com_data_invalida() {
-		assertTrue(emprestimo.validaData("29/03/2000"));
+		assertFalse(emprestimo.validaData("29/30/2000"));
 	}
+	@Test
+	public void CT05UC01FB_registrar_emprestimo_usuario_RA() {
+		assertEquals("11111",usuario.getRa());
+	}
+	@Test
+	public void CT05UC01FB_registrar_emprestimo_usuario_Nome() {
+		assertEquals("Jose da Silva",usuario.getNome());
+	}
+	@Test
+	public void CT05UC01FB_registrar_emprestimo_usuario_equals_null() {
+		assertFalse(usuario.equals(null));
+	}
+	
+	@Test
+	public void CT05UC01FB_registrar_emprestimo_usuario_equals_nome() {
+		Usuario u = new Usuario();
+		assertFalse(usuario.equals(u));
+	}
+	@Test
+	public void CT05UC01FB_registrar_emprestimo_usuario_equals_nome_dif() {
+		Usuario u = new Usuario();
+		u.setNome(null);
+		Usuario u2 = new Usuario();
+		u2.setNome("fjdhsalf");
+		assertFalse(u.equals(u2));
+	}
+	@Test
+	public void CT05UC01FB_registrar_emprestimo_usuario_equals_nome_dif2() {
+		Usuario u = new Usuario();
+		u.setNome(null);
+		Usuario u2 = new Usuario();
+		u2.setRa("1111111");
+		assertFalse(u.equals(u2));
+	}
+	@Test
+	public void CT05UC01FB_registrar_emprestimo_usuario_equals_diferente() {
+		Usuario u = new Usuario();
+		assertFalse(u.equals(usuario));
+	}
+	@Test
+	public void CT05UC01FB_registrar_emprestimo_usuario_equals_igual() {
+		assertTrue(usuario.equals(usuario));
+	}
+	
 }
